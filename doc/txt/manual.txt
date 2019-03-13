@@ -1917,7 +1917,7 @@ Here comes some information you might find useful for hacking pdnsd.
 6.1 Source files
 
 Makefile.am,          autoconf/automake/autoheader scripts. Makefile.am's are in
-configure.in,         most subdirectories.
+configure.ac,         most subdirectories.
 acconfig.h
 
 pdnsd.spec.in         A template from which configure generates a spec file for

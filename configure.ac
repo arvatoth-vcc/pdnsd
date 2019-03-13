@@ -27,7 +27,8 @@ freebsd_pthread="4"
 specbuild=no
 threadlib=default
 
-AM_INIT_AUTOMAKE($package, $version, [no-define])
+AC_INIT(package, version)
+AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(config.h)
 AC_GNU_SOURCE
 AC_DEFINE_UNQUOTED(VERSION,"$fullversion")
@@ -351,7 +352,7 @@ if test "$target" = "Linux"; then
 AC_MSG_CHECKING([if we can compile and link with -pthread])
 old_CFLAGS="$CFLAGS"
 CFLAGS="$CFLAGS -pthread"
-AC_LINK_IFELSE([
+AC_LINK_IFELSE([AC_LANG_SOURCE([
 #include <pthread.h>
 
 void *thread_func(void *data)
@@ -374,7 +375,7 @@ int main()
 
 	return (*((int *)retval)!=1);
 }
-],
+])],
   gcc_pthread_flag="yes", gcc_pthread_flag="no")
 CFLAGS="$old_CFLAGS"
 AC_MSG_RESULT([$gcc_pthread_flag])
@@ -405,7 +406,7 @@ if test "$target" = "Linux" -a "$threadlib" = default; then
 AC_MSG_CHECKING([if this is an NPTL-based system])
 old_CFLAGS="$CFLAGS"
 CFLAGS="$CFLAGS $thread_CFLAGS"
-AC_RUN_IFELSE([
+AC_RUN_IFELSE([AC_LANG_SOURCE([
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
@@ -442,7 +443,7 @@ int main()
 	fprintf(stderr,"main pid=%d, thread pid=%d\n",mainpid,*((int *)retval));
 	return (*((int *)retval)!=mainpid);
 }
-],
+])],
 [
   AC_MSG_RESULT([yes])
   threadlib=nptl

@@ -3,8 +3,8 @@ Forwarded: no
 Author: Dmitry Smirnov <onlyjob@member.fsf.org>
 Description: recognise GNU HUrd as valid target
 
---- a/configure.in
-+++ b/configure.in
+--- a/configure.ac
++++ b/configure.ac
 @@ -47,9 +47,9 @@
    Linux|linux)
      AC_DEFINE(TARGET, TARGET_LINUX)
