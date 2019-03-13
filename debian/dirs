@@ -1,0 +1,6 @@
+usr/sbin
+usr/share/pdnsd
+etc/resolvconf/update.d
+etc/NetworkManager/dispatcher.d/
+etc/insserv.conf.d
+etc/default

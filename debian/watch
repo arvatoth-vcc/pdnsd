@@ -1,0 +1,2 @@
+version=3
+http://members.home.nl/p.a.rombouts/pdnsd/releases/pdnsd-(.*)\.tar\.(?:gz|bz2|xz)

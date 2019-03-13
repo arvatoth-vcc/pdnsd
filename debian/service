@@ -1,0 +1,29 @@
+[Unit]
+Description=Provides a Proxy DNS Server
+Documentation=http://members.home.nl/p.a.rombouts/pdnsd/doc.html
+Requires=network.target
+After=network-online.target
+
+[Service]
+Type=notify
+Environment=START_OPTIONS=
+EnvironmentFile=-/etc/default/pdnsd
+ExecStart=/usr/sbin/pdnsd --status $START_OPTIONS
+Restart=on-failure
+KillMode=control-group
+RestartPreventExitStatus=255
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_BROADCAST CAP_NET_RAW CAP_SETUID CAP_SETGID
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_BROADCAST CAP_NET_RAW CAP_SETUID CAP_SETGID
+ProtectSystem=full
+ProtectHome=yes
+ProtectControlGroups=yes
+ProtectKernelModules=yes
+MemoryDenyWriteExecute=yes
+RestrictRealtime=yes
+RestrictAddressFamilies=AF_UNIX AF_NETLINK AF_INET AF_INET6 AF_PACKET
+SystemCallFilter=~@clock @cpu-emulation @debug @keyring @module @mount @obsolete @raw-io @reboot @swap
+SystemCallArchitectures=native
+LockPersonality=yes
+
+[Install]
+WantedBy=multi-user.target

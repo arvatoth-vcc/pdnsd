@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+# Restart pdnsd after the connection is made
+if [ $1 == "wlan0" ] && [ $2 == "up" ]; then
+ /etc/init.d/pdnsd restart;
+fi

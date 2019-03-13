@@ -1,0 +1,36 @@
+#!/usr/bin/make -f
+
+CPPFLAGS+=-DDEBIAN
+build_target:=$(shell dpkg-architecture -qDEB_BUILD_ARCH_OS|sed -e s/kfree//)
+
+%:
+	dh $@ --with autoreconf --with-systemd
+
+override_dh_autoreconf:
+	$(MAKE) -C doc -f doc_makefile
+	dh_autoreconf
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+	       --prefix=/usr \
+	       --sysconfdir=/etc \
+	       --with-target=$(build_target)  \
+	       --with-cachedir=/var/cache/pdnsd \
+	       --enable-ipv6 \
+	       --enable-new-rrs \
+	       --enable-isdn \
+	       --enable-tcp-queries
+
+override_dh_auto_install:
+	dh_auto_install
+	$(RM) -rv \
+            debian/pdnsd/var/cache/pdnsd/pdnsd.cache \
+            debian/pdnsd/etc/pdnsd.conf.sample
+	install -m 755 debian/resolvconf debian/pdnsd/etc/resolvconf/update.d/pdnsd
+	install -m 755 debian/002_NetMan_pdnsd debian/pdnsd/etc/NetworkManager/dispatcher.d/
+	install -m 644 debian/pdnsd.insserv debian/pdnsd/etc/insserv.conf.d/pdnsd
+
+override_dh_auto_installinit:
+
+override_dh_installchangelogs:
+	dh_installchangelogs ChangeLog Changelog.old

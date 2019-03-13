@@ -2,6 +2,8 @@
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
+#define ENABLE_SYSTEMD
+
 /* ONLY EDIT acconfig.h, NEVER config.h or config.h.in!
  * config.h MAY BE OVERWRITTEN BY make, config.h.in by autoheader! */
 

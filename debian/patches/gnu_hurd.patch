@@ -1,0 +1,40 @@
+Last-Update: 2013-06-04
+Forwarded: no
+Author: Dmitry Smirnov <onlyjob@member.fsf.org>
+Description: recognise GNU HUrd as valid target
+
+--- a/configure.in
++++ b/configure.in
+@@ -47,9 +47,9 @@
+   Linux|linux)
+     AC_DEFINE(TARGET, TARGET_LINUX)
+     target="Linux"
+     ;;
+-  BSD| bsd)
++  BSD| bsd|Hurd|hurd)
+     AC_DEFINE(TARGET, TARGET_BSD)
+     target="BSD"
+     ;;
+   Cygwin|CYGWIN|cygwin)
+@@ -58,9 +58,9 @@
+     ;;
+   autodetect)
+     ;;
+   *)
+-    AC_MSG_ERROR([--with-target must have Linux, BSD or Cygwin as parameter.])
++    AC_MSG_ERROR([--with-target must have Linux, BSD, Hurd or Cygwin as parameter.])
+     ;;
+ esac
+ 
+ AC_ARG_WITH(cachedir,
+@@ -286,9 +286,9 @@
+       AC_MSG_RESULT(Linux)
+       AC_DEFINE(TARGET, TARGET_LINUX)
+       target="Linux"
+       ;;
+-    FreeBSD|NetBSD|OpenBSD|Darwin)
++    FreeBSD|NetBSD|OpenBSD|Darwin|GNU)
+       AC_MSG_RESULT("${uname_sys}")
+       AC_DEFINE(TARGET, TARGET_BSD)
+       target="BSD"
+       ;;

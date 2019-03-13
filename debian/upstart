@@ -1,0 +1,27 @@
+# pdnsd
+
+description "Provides a Proxy DNS Server"
+author "Mihaly ARVA-TOTH <mihaly.arva-toth@vcc.live>"
+
+start on (filesystem and started networking)
+stop on runlevel [!2345]
+
+console log
+
+expect daemon
+respawn
+
+env DEFAULTFILE=/etc/default/pdnsd
+env START_OPTIONS=""
+
+pre-start script
+    [ -s "$DEFAULTFILE" ] && . "$DEFAULTFILE"
+    if [ "$START_DAEMON" != "yes" ]; then
+       stop; exit 0;
+    fi
+end script
+
+script
+    [ -s "$DEFAULTFILE" ] && . "$DEFAULTFILE"
+    exec /usr/sbin/pdnsd --status --daemon $START_OPTIONS
+end script

@@ -1,0 +1,50 @@
+Last-Update: 2013-06-04
+Forwarded: no
+Description: Adding ipv6 in localhost
+Author: Mahyuddin Susanto <udienz@gmail.com>
+Bug-Debian: http://bugs.debian.org/466332
+Bug-Debian: http://bugs.debian.org/504211
+
+--- a/doc/pdnsd.conf.in
++++ b/doc/pdnsd.conf.in
+@@ -3,13 +3,14 @@
+ // Add or remove '#' in front of options you want to disable or enable, respectively.
+ // Remove '/*' and '*/' to enable complete sections.
+ 
+ global {
+-	perm_cache=1024;
++	perm_cache=2048;
+ 	cache_dir="@cachedir@";
+ #	pid_file = /var/run/pdnsd.pid;
+ 	run_as="@def_id@";
+-	server_ip = 127.0.0.1;  # Use eth0 here if you want to allow other
++	server_ip = 127.0.0.1,
++				0:0:0:0:0:0:0:1;  # Use eth0 here if you want to allow other
+ 				# machines on your network to query pdnsd.
+ 	status_ctl = on;
+ #	paranoid=on;       # This option reduces the chance of cache poisoning
+ 	                   # but may make pdnsd less efficient, unfortunately.
+@@ -69,9 +70,10 @@
+ # of the search engines of google, microsoft and yahoo.
+ # If you do not like this behaviour the "reject" option may be useful.
+ server {
+ 	label = "opendns";
+-	ip = 208.67.222.222, 208.67.220.220;
++	ip = 208.67.222.222,
++	     208.67.220.220;
+ 	reject = 208.69.32.0/24,  # You may need to add additional address ranges
+ 	         208.69.34.0/24,  # here if the addresses of their search engines
+ 	         208.67.219.0/24; # change.
+ 	reject_policy = fail;     # If you do not provide any alternative server
+@@ -122,9 +124,10 @@
+ 
+ rr {
+ 	name=localhost;
+ 	reverse=on;
+-	a=127.0.0.1;
++	a=127.0.0.1,
++	0:0:0:0:0:0:0:1;
+ 	owner=localhost;
+ 	soa=localhost,root.localhost,42,86400,900,86400,86400;
+ }
+ 

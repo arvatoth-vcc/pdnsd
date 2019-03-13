@@ -1,0 +1,22 @@
+Source: pdnsd
+Section: net
+Priority: optional
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Build-Depends: debhelper (>= 9), po-debconf, dh-autoreconf, w3m
+Standards-Version: 3.9.4
+Vcs-Git: git://anonscm.debian.org/collab-maint/pdnsd.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/pdnsd.git
+Homepage: http://members.home.nl/p.a.rombouts/pdnsd/index.html
+
+Package: pdnsd
+Architecture: any
+Depends: adduser, debconf | cdebconf, ${misc:Depends}, ${shlibs:Depends}
+Recommends: resolvconf
+Description: Proxy DNS Server
+ pdnsd, is an IPv6 capable proxy DNS server with permanent caching (the cache
+ contents are written to hard disk on exit) that is designed to cope with
+ unreachable or down DNS servers (for example in dial-in networking).
+ .
+ pdnsd can be used with applications that do dns lookups, eg on startup, and
+ can't be configured to change that behaviour, to prevent the often
+ minute-long hangs (or even crashes) that result from stalled dns queries.

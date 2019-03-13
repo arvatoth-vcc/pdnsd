@@ -1,0 +1,140 @@
+Last-Update: 2013-06-04
+Forwarded: https://gitorious.org/pdnsd/pdnsd/merge_requests/2
+Author: Dmitry Smirnov <onlyjob@member.fsf.org>
+Description: spelling corrections and man page generator fix
+
+--- a/src/servers.c
++++ b/src/servers.c
+@@ -161,9 +161,9 @@
+ 					DEBUG_MSG("uptest command \"%s\" was terminated by signal %d\n",
+ 						  serv->uptest_cmd, WTERMSIG(status));
+ 				}
+ 				else {
+-					DEBUG_MSG("status of uptest command \"%s\" is of unkown type (0x%x)\n",
++					DEBUG_MSG("status of uptest command \"%s\" is of unknown type (0x%x)\n",
+ 						  serv->uptest_cmd, status);
+ 				}
+ #endif
+ 			}
+--- a/doc/html/doc.html
++++ b/doc/html/doc.html
+@@ -1017,9 +1017,9 @@
+ 	  any &quot;traditional&quot; server has them (the DNS security extensions solve these problems, but are not widely
+ 	  supported).
+ 	  One of this vulnerabilities is that an attacker may bombard you with forged answers in hopes that one may match a
+ 	  query
+-	  you have done. If you have done such a query, one in 65536 forged packets will be succesful (i.e. an average packet
++	  you have done. If you have done such a query, one in 65536 forged packets will be successful (i.e. an average packet
+ 	  count of 32768 is needed for that attack). pdnsd can use TCP for queries,
+ 	  which has a slightly higher overhead, but is much less vulnerable to such attacks on sane operating systems. Also, pdnsd
+ 	  chooses random query ids, so that an attacker cannot take a shortcut. If the attacker is able to listen to your network
+ 	  traffic, this attack is relatively easy, though.<br>
+@@ -1385,9 +1385,9 @@
+ 	      and additionally for Linux isdn interfaces (as of kernel 2.2). Note that
+ 	      you need a <code>/dev/isdninfo</code> device file (major#45, minor#255), or the
+ 	      isdn uptest will always fail.
+ 	    <li><b><code>dev</code></b> and <b><code>diald</code></b>: Perform an <code>if</code> uptest, and, if that
+-	      was succesful, additionally check whether a program is running that
++	      was successful, additionally check whether a program is running that
+ 	      has locked a given (modem-) device. The needed parameters are an interface (specified as for the <code>if</code>
+ 	      uptest, e.g. <code>&quot;ppp0&quot;</code>) and a device relative to <code>/dev</code> (e.g.
+ 	      <code>&quot;modem&quot;</code> for <code>/dev/modem</code> specified using the <code>device=</code> option.
+ 	      pdnsd will then look for a pid file for the given interface in <code>/var/lock</code> (e.g.
+@@ -1536,9 +1536,9 @@
+ 	  In every fetched dns record, there is a cache timeout given, which
+ 	  specifies how long the fetched data may be cached until it needs to be
+ 	  reloaded. If <code>purge_cache</code> is set to <code>off</code>, the stale records are not purged
+ 	  (unless the cache size would be exceeded, in this case the oldest records are purged).
+-	  Instead, they are still served if they cannot succesfully be
++	  Instead, they are still served if they cannot successfully be
+ 	  updated (e.g. because all servers are down).<br>
+ 	  Default is <code>off</code>.
+ 	</td>
+       </tr>
+@@ -1875,10 +1875,10 @@
+       <tr>
+ 	<td>
+ 	  <b><code>ptr=<i>string</i>;</code></b><br>
+ 	  Defines a PTR (domain name pointer) record. The argument is a host name in
+-	  dotted notation (see name). The ptr record is for resolving adresses into names. For example, if
+-	  you want the adress 127.0.0.1 to resolve into localhost, and localhost into 127.0.0.1, you need something
++	  dotted notation (see name). The ptr record is for resolving addresses into names. For example, if
++	  you want the address 127.0.0.1 to resolve into localhost, and localhost into 127.0.0.1, you need something
+ 	  like the following sections:<br>
+ 	  <pre>
+     rr {
+ 	name = localhost;
+@@ -1897,11 +1897,11 @@
+ 	  with <code>reverse=on</code>.<br>
+ 	  There is something special about the name in the second section:
+ 	  when a resolver wants to get a host name from an internet address,
+ 	  it composes an address that is built of the IP address in reverse byte order
+-	  (<code>1.0.0.127</code> instead of <code>127.0.0.1</code>) where each byte of the adress written
++	  (<code>1.0.0.127</code> instead of <code>127.0.0.1</code>) where each byte of the address written
+ 	  as number constitutes a sub-domain under the domain <code>in-addr.arpa.</code> <br>
+-	  So, if you want to compose an adress for reverse resolving, take your ip in dotted notation (e.g. <code>1.2.3.4</code>),
++	  So, if you want to compose an address for reverse resolving, take your ip in dotted notation (e.g. <code>1.2.3.4</code>),
+ 	  reverse the byte order (<code>4.3.2.1</code>) and append in-addr.arpa. (<code>4.3.2.1.in-addr.arpa.</code>)
+ 	  Then, define an <code>rr</code> section giving this address as <code>name</code> and the domain name corresponding to
+ 	  that ip in the <code>ptr</code> option.
+ 	</td>
+@@ -1991,9 +1991,9 @@
+     Every <code>neg</code> section specifies a dns resource record or a dns domain that should be
+     cached negatively locally. Queries for negatively cached records are always answered
+     immediatley with an error or an empty answer without querying other hosts as long
+     as the record is valid. The records defined with <code>neg</code> sections remain
+-    valid until they are explicitely invalidated or deleted by the user using
++    valid until they are explicitly invalidated or deleted by the user using
+     <a href="#pdnsdctl"><code>pdnsd-ctl</code></a>.<br>
+     This is useful if a certain application asks periodically for nonexisting hosts or
+     RR types and you do not want a query to go out every time the cached record has
+     timed out. Example: Netscape Communicator will ask for the servers  news and mail
+--- a/doc/html/faq.html
++++ b/doc/html/faq.html
+@@ -216,9 +216,9 @@
+ 	<td bgcolor="#FFCCFF"><b>A:</b></td>
+ 	<td bgcolor="#DDFFEE">
+ 	  This warning only occurs if you use the <code>uptest=exec</code> option in your
+ 	  configuration. It means that the uptest command is run as root
+-	  because pdnsd is running as root, and this was not explicitely specified.
++	  because pdnsd is running as root, and this was not explicitly specified.
+ 	  The idea is that it may introduce security holes (in the programs being run)
+ 	  when they run as root, and so they shouldn't do that if possible.
+ 	  You can specify the user that shall run the command by appending its name
+ 	  comma-separated as string to the <code>uptest_cmd</code> line: <br>
+--- a/doc/html/index.html
++++ b/doc/html/index.html
+@@ -341,9 +341,9 @@
+ 	<td bgcolor="#CCFFFF" width="80%"><b>Documentation update.</b>
+ 	Please note that pdnsd should <b>never be installed with setuid or setgid attributes</b>,
+ 	as it is not always possible to give up all privileges due to operating system restrictions.
+ 	While this was never intended and I don't think that anybody would actually do this, the
+-	documentation was updated to explicitely mention this to avoid misunderstandings.
++	documentation was updated to explicitly mention this to avoid misunderstandings.
+ 	</td>
+       </tr>
+       <tr>
+ 	<td bgcolor="#FFCCFF" width="20%"><b>2002-01-15</b></td>
+@@ -485,9 +485,9 @@
+     addition to the obvious &quot;none&quot; test (the server is always regarded as available,
+     or availability is set on or off using the <a href="doc.html#pdnsdctl"><code>pdnsd-ctl</code></a> utility).
+     These tests are:
+     <ul>
+-      <li><b>ping:</b> a given adress is ping'ed in a given interval. If it there is no response
++      <li><b>ping:</b> a given address is ping'ed in a given interval. If it there is no response
+ 	  or the host is unreachable, the server is seen to be not available (for those who don't know:
+ 	  pinging is sending a certain Internet packet type to a host to which any standard-conformant
+ 	  host is required to reply).
+       <li><b>if:</b> a given network interface is tested whether it is existent, up and running. If
+--- a/doc/html2confman.pl
++++ b/doc/html2confman.pl
+@@ -108,8 +108,9 @@
+     s{/var/cache/pdnsd\b}{\@cachedir\@}g;
+     s{(?<![-\w\\])-[-\w]*}{(my $s=$&) =~ s{-}{\\-}g;$s}ge;
+     s{\bpdnsd-ctl\b}{pdnsd\\-ctl}g;
+     s{\blist-rrtypes\b}{list\\-rrtypes}g;
++    s{(\\[nt])}{\\$1}g;  # escape "\t" and "\n" to fix "W: manpage-has-errors-from-man usr/share/man/man5/pdnsd.conf.5.gz 45: a space character is not allowed in an escape name"
+     print;
+ }
+ 
+ print <<ENDOFTRAILER;

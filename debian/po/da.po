@@ -1,0 +1,78 @@
+# Danish translation pdnsd.
+# Copyright (C) 2012 pdnsd & nedenstående oversættere.
+# This file is distributed under the same license as the pdnsd package.
+# Joe Hansen (joedalton2@yahoo.dk), 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pdnsd\n"
+"Report-Msgid-Bugs-To: madcoder@debian.org\n"
+"POT-Creation-Date: 2007-08-03 14:16+0200\n"
+"PO-Revision-Date: 2012-02-09 12:42+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: select
+#. Choices
+#: ../templates:1001
+msgid "Use resolvconf"
+msgstr "Brug resolvconf"
+
+#. Type: select
+#. Choices
+#: ../templates:1001
+msgid "Use root servers"
+msgstr "Brug administratorservere (root)"
+
+#. Type: select
+#. Choices
+#: ../templates:1001
+msgid "Manual"
+msgstr "Manuelt"
+
+#. Type: select
+#. Description
+#: ../templates:1002
+msgid "General type of pdnsd configuration:"
+msgstr "Generel type for pdnsd-konfiguration:"
+
+#. Type: select
+#. Description
+#: ../templates:1002
+msgid ""
+"Please select the pdnsd configuration method that best meets your needs."
+msgstr ""
+"Vælg venligst pdnsd-konfigurationsmetoden som bedst møder dine behov."
+
+#. Type: select
+#. Description
+#: ../templates:1002
+msgid ""
+" - Use resolvconf  : use informations provided by resolvconf.\n"
+" - Use root servers: make pdnsd behave like a caching, recursive DNS\n"
+"                     server.\n"
+" - Manual          : completely manual configuration. The pdnsd daemon\n"
+"                     will not start until you edit /etc/pdnsd.conf and\n"
+"                     /etc/default/pdnsd."
+msgstr ""
+" - Brug resolvconf  : brug informationer tilbudt af resolvconf.\n"
+" - Brug adm.servere : lad pdnsd opføre sig som en mellemlagrende, rekursiv\n"
+"                      DNS-server.\n"
+" - Manuelt          : fuldstændig manuel konfiguration. Pdnsd-dæmonen\n"
+"                      vil ikke starte før du redigerer /etc/pdnsd.conf og\n"
+"                      /etc/default/pdnsd."
+
+#. Type: select
+#. Description
+#: ../templates:1002
+msgid ""
+"Note: If you already use a DNS server that listens to 127.0.0.1:53, you have "
+"to choose \"Manual\"."
+msgstr ""
+"Bemærk: Hvis du allerede bruger en DNS-server som lytter på 127.0.0.1:53, så "
+"skal du vælge »manuelt«."
+
