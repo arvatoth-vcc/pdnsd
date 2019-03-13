@@ -1,0 +1,12 @@
+#!/bin/sh 
+
+set -e
+
+if [ "$1" = "purge" ]
+then
+    rm -rf /var/cache/pdnsd
+    rm -f /etc/default/pdnsd
+fi
+
+#DEBHELPER#
+

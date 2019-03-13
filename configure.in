@@ -11,6 +11,7 @@ target="autodetect"
 cachedir="/var/cache/$package"
 ipv4_default=1
 have_ipv4="yes"
+have_systemd="yes"
 #newrrs="yes"
 query_m="udponly"
 have_tcp_server="yes"
@@ -90,6 +91,13 @@ AC_ARG_ENABLE(ipv6,
       ipv4_default=0
     fi
   fi])
+
+AC_ARG_ENABLE(systemd,
+[  --disable-systemd           Disable systemd sd-notify support
+                              (default=enabled)],
+  have_systemd=$enableval)
+
+test $have_systemd = "yes" && AC_DEFINE([ENABLE_SYSTEMD], [], [Description])
 
 AC_ARG_ENABLE(ipv4-startup,
 [  --disable-ipv4-startup      Disable IPv4 on pdnsd startup by default
@@ -378,6 +386,11 @@ AC_MSG_RESULT([$gcc_pthread_flag])
     AC_CHECK_LIB(pthread, pthread_create)
   fi
 fi
+
+if test "$have_systemd" = "yes"; then
+  AC_CHECK_LIB(systemd, sd_notify)
+fi
+
 if test "$target" = "BSD" -a `uname` != Darwin ; then
 #  if test $freebsd_pthread = 4 ; then
     thread_CFLAGS="-pthread"

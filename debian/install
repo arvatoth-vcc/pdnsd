@@ -1,0 +1,6 @@
+debian/002_NetMan_pdnsd  etc/NetworkManager/dispatcher.d/
+debian/pdnsd-default     usr/share/pdnsd
+debian/pdnsd-*.conf      usr/share/pdnsd/
+debian/pdnsd.conf        etc/
+doc/html/*.html          usr/share/doc/pdnsd/html/
+doc/txt/*.txt            usr/share/doc/pdnsd/txt/

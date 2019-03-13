@@ -47,6 +47,9 @@
 #include "icmp.h"
 #include "hash.h"
 
+#ifdef ENABLE_SYSTEMD
+#include <systemd/sd-daemon.h>
+#endif
 
 #if DEBUG>0
 short int debug_p=0;
@@ -667,6 +670,12 @@ int main(int argc,char *argv[])
 #endif
 #undef thrdfail
 	}
+
+#ifdef ENABLE_SYSTEMD
+	sd_notifyf(0, "READY=1\n"
+			"STATUS=Accepting requests...\n"
+			"MAINPID=%lu\n", (unsigned long) getpid());
+#endif
 
 #if (TARGET==TARGET_LINUX) && !defined(THREADLIB_NPTL)
 	pthread_sigmask(SIG_BLOCK,&sigs_msk,NULL);
